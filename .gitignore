@@ -6,7 +6,6 @@ project.lock.json
 nupkg/
 
 # Visual Studio Code
-.vscode
 .ionide
 
 # Rider
@@ -36,3 +35,5 @@ msbuild.wrn
 
 # Visual Studio 2015
 .vs/
+
+.fake
