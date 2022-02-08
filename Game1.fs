@@ -1,4 +1,4 @@
-namespace fs
+namespace RetroRpg
 
 open Microsoft.Xna.Framework
 open Microsoft.Xna.Framework.Graphics
@@ -12,13 +12,12 @@ type Game1 () as this =
     let mutable spriteBatch = Unchecked.defaultof<_>
     let mutable Tex : Texture2D option = None
 
-    do
-        this.Content.RootDirectory <- "Content"
-        this.IsMouseVisible <- true
-
     override this.Initialize() =
         // TODO: Add your initialization logic here
-
+        let contentPath = System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), "Content")
+        this.Content.RootDirectory <- contentPath
+        this.IsMouseVisible <- true
+        
         base.Initialize()
 
     override this.LoadContent() =

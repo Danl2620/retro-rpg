@@ -1,4 +1,4 @@
-﻿namespace fs
+﻿namespace RetroRpg
 
 module Program =
 
