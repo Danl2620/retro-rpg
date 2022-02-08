@@ -20,24 +20,14 @@
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
     <EmbeddedResource Include="Icon.bmp" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Include="Game1.fs" />
     <Compile Include="Program.fs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <MonoGameContentReference Include="Content/Content.mgcb" Visible="false" />
-  </ItemGroup>
-
-  <ItemGroup>
     <TrimmerRootAssembly Include="MonoGame.Framework" Visible="false" />
+    <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641" />
+    <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.0.1641" />
+    <PackageReference Include="FSharp.Core" Version="6.0.3">
+      <GeneratePathProperty></GeneratePathProperty>
+    </PackageReference>
   </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.*" />
-    <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.*" />
-  </ItemGroup>
-
 </Project>
