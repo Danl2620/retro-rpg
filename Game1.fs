@@ -14,8 +14,8 @@ type Game1 () as this =
 
     override this.Initialize() =
         // TODO: Add your initialization logic here
-        let contentPath = System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), "Content")
-        this.Content.RootDirectory <- contentPath
+        //let contentPath = System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), "Content/bin/DesktopGL")
+        this.Content.RootDirectory <- "Content"
         this.IsMouseVisible <- true
         
         base.Initialize()
