@@ -3,13 +3,14 @@
 
 /outputDir:bin/$(Platform)
 /intermediateDir:obj/$(Platform)
-/platform:DesktopGL
-/config:
+/platform:MacOSX
+/config:Debug
 /profile:Reach
 /compress:False
 
 #-------------------------------- References --------------------------------#
 
+/reference:../../../../.nuget/packages/monogame.extended.content.pipeline/3.8.0/tools/MonoGame.Extended.Content.Pipeline.dll
 
 #---------------------------------- Content ---------------------------------#
 
@@ -109,3 +110,12 @@
 /processorParam:TextureFormat=Color
 /build:Sword2.png
 
+#begin tileset/overworld.tsx
+/importer:TiledMapTilesetImporter
+/processor:TiledMapTilesetProcessor
+/build:tileset/overworld.tsx
+
+#begin maps/test.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:maps/test.tmx

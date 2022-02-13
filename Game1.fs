@@ -4,11 +4,28 @@ open Microsoft.Xna.Framework
 open Microsoft.Xna.Framework.Graphics
 open Microsoft.Xna.Framework.Input
 open Microsoft.Xna.Framework.Content
+open MonoGame.Extended.Tiled
+open MonoGame.Extended.Tiled.Renderers
+
+type Map =
+    { tileMap: TiledMap
+      tileMapRenderer: TiledMapRenderer }
+
+    
+    member this.Render() =
+        this.tileMapRenderer.Draw()
+
+    static member create(graphicsDevice: GraphicsDevice, content: ContentManager) =
+        let map = content.Load<TiledMap>("samplemap")
+        { tileMap = map
+          tileMapRenderer = new TiledMapRenderer(graphicsDevice, map) }
+
 
 type Game1 () as this =
     inherit Game()
 
     let graphics = new GraphicsDeviceManager(this)
+    let mutable map: Map option = None
     let mutable spriteBatch = Unchecked.defaultof<_>
     let mutable Tex : Texture2D option = None
 
@@ -21,6 +38,7 @@ type Game1 () as this =
         base.Initialize()
 
     override this.LoadContent() =
+        map <- Some (Map.create(this.GraphicsDevice, this.Content))
         spriteBatch <- new SpriteBatch(this.GraphicsDevice)
         
         // TODO: use this.Content to load your game content here

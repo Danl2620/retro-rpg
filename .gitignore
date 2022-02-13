@@ -42,3 +42,7 @@ msbuild.wrn
 .mgstats
 
 .fake
+
+# MonoGame Content Builder Editor
+MGCB Editor.app
+MGCB.Editor.zip
