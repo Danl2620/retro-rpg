@@ -1,4 +1,5 @@
-#Require -Version 6/0
+#Requires -Version 6.0
+$ErrorActionPreference = "Stop"
 
 ##    /f:"../../../../.nuget/packages/monogame.extended.content.pipeline/3.8.0/tools/MonoGame.Extended.Content.Pipeline.dll" `
 

@@ -2,6 +2,6 @@
 $ErrorActionPreference = "Stop"
 
 dotnet tool restore
-dotnet tool run mgcb Content/*.png
+& ./build_content.ps1
 dotnet build                              
 dotnet restore
