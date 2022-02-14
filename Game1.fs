@@ -23,6 +23,11 @@ type Map =
     member this.Size() : int*int =
         (this.tileMap.WidthInPixels, this.tileMap.HeightInPixels)
 
+    member this.PlayerPosition() : Vector2 =
+        let objectLayer = this.tileMap.ObjectLayers.[0]
+        let p = objectLayer.Objects.[0].Position
+        p
+
     static member create(graphicsDevice: GraphicsDevice, content: ContentManager) =
         let map = content.Load<TiledMap>("example/samplemap")
         { tileMap = map
@@ -68,6 +73,7 @@ type Game1 () as this =
             let viewportAdapter = new BoxingViewportAdapter(this.Window, this.GraphicsDevice, w, h)
             camera <- OrthographicCamera(viewportAdapter) |> Some
             playerPosition <- Vector2((float32 w)/2.0f,(float32 h)/2.0f)
+            playerPosition.ToString() |> printfn "player position: %s"
         base.Initialize()
 
     override this.LoadContent() =
@@ -77,6 +83,8 @@ type Game1 () as this =
         | (w,h) ->
             cameraPosition <- Vector2((float32 w)/2.0f, (float32 h)/2.0f)
 
+        playerPosition <- sampleMap.PlayerPosition()
+        playerPosition.ToString() |> printfn "player position: %s"
         map <- Some sampleMap
         spriteBatch <- new SpriteBatch(this.GraphicsDevice)
         
@@ -107,6 +115,8 @@ type Game1 () as this =
         base.Draw(gameTime)
 
         spriteBatch.Begin()
-        spriteBatch.Draw(Tex.Value, playerPosition, Color.White)
+        let p = playerPosition
+        let sp = camera.Value.WorldToScreen(p)
+        spriteBatch.Draw(Tex.Value, sp, Color.White)
         spriteBatch.End()
 

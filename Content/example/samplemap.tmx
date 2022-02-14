@@ -396,7 +396,6 @@
   <object id="3" gid="5624" x="1510" y="1117" width="24" height="24"/>
   <object id="4" gid="5625" x="1250" y="858" width="24" height="24"/>
  </objectgroup>
- <objectgroup id="15" name="Object Layer 2"/>
  <layer id="7" name="building" width="60" height="60">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,673,673,674,665,653,0,0,673,674,657,0,0,0,0,0,0,0,0,0,0,0,0,681,673,674,728,0,0,0,
