@@ -47,3 +47,6 @@ msbuild.wrn
 MGCB Editor.app
 MGCB-Editor.app
 MGCB.Editor.zip
+
+# Tiled files
+*.tiled-session
