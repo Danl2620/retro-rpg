@@ -29,11 +29,28 @@ type Map =
         p
 
     static member create(graphicsDevice: GraphicsDevice, content: ContentManager) =
-        //let map = content.Load<TiledMap>("example/samplemap")
-        let map = content.Load<TiledMap>("oryx/TMX/oryx_16-bit_fantasy_test")
+        let map = content.Load<TiledMap>("example/samplemap")
+        //let map = content.Load<TiledMap>("oryx/TMX/oryx_16-bit_fantasy_test")
         { tileMap = map
           tileMapRenderer = new TiledMapRenderer(graphicsDevice, map) }
 
+type Character =
+    { sprite: Texture2D
+      mutable position: Vector2 }
+
+    member this.Draw(camera: Camera<Vector2>, spriteBatch: SpriteBatch) =
+        let p = this.position
+        let sp = camera.WorldToScreen(p)
+        spriteBatch.Draw(this.sprite, sp, Color.White)
+
+    member this.Move(dir: Vector2, map: Map) =
+        let buildingLayer = map.tileMap.GetLayer("building") :?> TiledMapTileLayer
+        let newPosition = this.position + dir
+        let w,h = buildingLayer.TileWidth, buildingLayer.TileHeight
+        let tile = buildingLayer.GetTile(uint16 (newPosition.X/(float32 w)), uint16 (newPosition.Y/(float32 h)))
+        let tileId = tile.GlobalIdentifier
+        if tileId = 0 then
+            this.position <- newPosition
 
 type Game1 () as this =
     inherit Game()
@@ -41,10 +58,9 @@ type Game1 () as this =
     let graphics = new GraphicsDeviceManager(this)
     let mutable map: Map option = None
     let mutable spriteBatch = Unchecked.defaultof<_>
-    let mutable Tex : Texture2D option = None
     let mutable camera : OrthographicCamera option = None
     let mutable cameraPosition: Vector2 = Vector2.Zero
-    let mutable playerPosition: Vector2 = Vector2.Zero
+    let mutable player: Character option = None
 
     // private functions
     let getMovementDirection() : Vector2 =
@@ -73,8 +89,8 @@ type Game1 () as this =
         | (w,h) ->
             let viewportAdapter = new BoxingViewportAdapter(this.Window, this.GraphicsDevice, w, h)
             camera <- OrthographicCamera(viewportAdapter) |> Some
-            playerPosition <- Vector2((float32 w)/2.0f,(float32 h)/2.0f)
-            playerPosition.ToString() |> printfn "player position: %s"
+            //playerPosition <- Vector2((float32 w)/2.0f,(float32 h)/2.0f)
+            //playerPosition.ToString() |> printfn "player position: %s"
         base.Initialize()
 
     override this.LoadContent() =
@@ -84,13 +100,16 @@ type Game1 () as this =
         | (w,h) ->
             cameraPosition <- Vector2((float32 w)/2.0f, (float32 h)/2.0f)
 
-        //playerPosition <- sampleMap.PlayerPosition()
-        //playerPosition.ToString() |> printfn "player position: %s"
         map <- Some sampleMap
         spriteBatch <- new SpriteBatch(this.GraphicsDevice)
         
         // TODO: use this.Content to load your game content here
-        Tex <- Some (this.Content.Load("Basic1"))
+        player <- Some {
+            sprite = this.Content.Load("Basic1")
+            position = sampleMap.PlayerPosition()
+        }
+
+        //playerPosition.ToString() |> printfn "player position: %s"
 
     override this.Update (gameTime) =
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back = ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -103,8 +122,12 @@ type Game1 () as this =
         let speed: float32 = 200.0f
         let seconds = gameTime.GetElapsedSeconds()
         let movementDirection = getMovementDirection()
-        cameraPosition <- cameraPosition + speed * movementDirection * seconds
-        camera |> Option.iter (fun c -> c.LookAt(cameraPosition))
+        player |> Option.iter (fun p -> p.Move(movementDirection, map.Value))
+        //cameraPosition <- cameraPosition + speed * movementDirection * seconds
+        //camera |> Option.iter (fun c -> c.LookAt(cameraPosition))
+
+        let p = player.Value.position
+        camera |> Option.iter (fun c -> c.LookAt(p))
 
         base.Update(gameTime)
 
@@ -116,8 +139,6 @@ type Game1 () as this =
         base.Draw(gameTime)
 
         spriteBatch.Begin()
-        let p = playerPosition
-        let sp = p // camera.Value.WorldToScreen(p)
-        spriteBatch.Draw(Tex.Value, sp, Color.White)
+        player |> Option.iter (fun p -> p.Draw(camera.Value, spriteBatch))
         spriteBatch.End()
 
