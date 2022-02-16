@@ -29,7 +29,8 @@ type Map =
         p
 
     static member create(graphicsDevice: GraphicsDevice, content: ContentManager) =
-        let map = content.Load<TiledMap>("example/samplemap")
+        //let map = content.Load<TiledMap>("example/samplemap")
+        let map = content.Load<TiledMap>("oryx/TMX/oryx_16-bit_fantasy_test")
         { tileMap = map
           tileMapRenderer = new TiledMapRenderer(graphicsDevice, map) }
 
@@ -83,8 +84,8 @@ type Game1 () as this =
         | (w,h) ->
             cameraPosition <- Vector2((float32 w)/2.0f, (float32 h)/2.0f)
 
-        playerPosition <- sampleMap.PlayerPosition()
-        playerPosition.ToString() |> printfn "player position: %s"
+        //playerPosition <- sampleMap.PlayerPosition()
+        //playerPosition.ToString() |> printfn "player position: %s"
         map <- Some sampleMap
         spriteBatch <- new SpriteBatch(this.GraphicsDevice)
         
@@ -116,7 +117,7 @@ type Game1 () as this =
 
         spriteBatch.Begin()
         let p = playerPosition
-        let sp = camera.Value.WorldToScreen(p)
+        let sp = p // camera.Value.WorldToScreen(p)
         spriteBatch.Draw(Tex.Value, sp, Color.White)
         spriteBatch.End()
 
