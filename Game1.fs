@@ -36,7 +36,14 @@ type Map =
 
 type Character =
     { sprite: Texture2D
-      mutable position: Vector2 }
+      mutable position: Vector2
+      mutable destination: Vector2 }
+
+    member this.Update(gameTime: GameTime) =
+        // figure out how to curve interp from one tile to the next using the current position and the destination and passage of time.
+        // (should allow move input to queue ahead by 1 or 2)
+        // need gameTime for moves too
+        ()
 
     member this.Draw(camera: Camera<Vector2>, spriteBatch: SpriteBatch) =
         let p = this.position
@@ -117,6 +124,7 @@ type Game1 () as this =
 
         // TODO: Add your update logic here
         map |> Option.iter (fun m -> m.Update(gameTime))
+        player |> Option.iter (fun p -> p.Update(gameTime))
 
         // update camera
         let speed: float32 = 200.0f
