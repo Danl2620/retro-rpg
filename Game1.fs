@@ -1,6 +1,6 @@
 namespace RetroRpg
 
-open System
+//open System
 open Microsoft.Xna.Framework
 open Microsoft.Xna.Framework.Graphics
 open Microsoft.Xna.Framework.Input
@@ -10,6 +10,28 @@ open MonoGame.Extended.Tiled
 open MonoGame.Extended.Tiled.Renderers
 open MonoGame.Extended.ViewportAdapters
 
+/// -------------------------------------------------------------------------------------------------------- ///
+type Curve =
+    { p0: Vector2
+      p1: Vector2
+      startTime: float32
+      duration: float32 }
+
+    member this.Evaluate(time: float32) : 'T =
+        let distance = this.p1 - this.p0
+        let t = (time - this.startTime)/this.duration
+        this.p0 + distance*t
+
+    member this.Finished(time: float32) : bool =
+        time > this.startTime + this.duration
+
+    static member create(p0:Vector2, p1:Vector2, startTime:float32, duration:float32) =
+        { p0 = p0
+          p1 = p1
+          startTime = startTime
+          duration = duration }
+
+/// -------------------------------------------------------------------------------------------------------- ///
 type Map =
     { tileMap: TiledMap
       tileMapRenderer: TiledMapRenderer }
@@ -34,31 +56,61 @@ type Map =
         { tileMap = map
           tileMapRenderer = new TiledMapRenderer(graphicsDevice, map) }
 
+/// -------------------------------------------------------------------------------------------------------- ///
 type Character =
     { sprite: Texture2D
       mutable position: Vector2
-      mutable destination: Vector2 }
+      //mutable destination: Vector2
+      mutable moveCurve : Curve option }
 
     member this.Update(gameTime: GameTime) =
         // figure out how to curve interp from one tile to the next using the current position and the destination and passage of time.
         // (should allow move input to queue ahead by 1 or 2)
         // need gameTime for moves too
-        ()
+        match this.moveCurve with
+        | Some curve ->
+            let time = gameTime.TotalGameTime.TotalSeconds |> float32
+            if curve.Finished(time) then
+                //printfn "player update: %s/%s/%f" (this.position.ToString()) (curve.p1.ToString()) time
+                this.position <- curve.p1
+                this.moveCurve <- None
+            else
+                let newPosition = curve.Evaluate(time)
+                //printfn "player update: %s/%s/%f" (this.position.ToString()) (newPosition.ToString()) time
+                this.position <- newPosition
+        | _ -> ()
 
     member this.Draw(camera: Camera<Vector2>, spriteBatch: SpriteBatch) =
         let p = this.position
         let sp = camera.WorldToScreen(p)
         spriteBatch.Draw(this.sprite, sp, Color.White)
 
-    member this.Move(dir: Vector2, map: Map) =
-        let buildingLayer = map.tileMap.GetLayer("building") :?> TiledMapTileLayer
-        let newPosition = this.position + dir
-        let w,h = buildingLayer.TileWidth, buildingLayer.TileHeight
-        let tile = buildingLayer.GetTile(uint16 (newPosition.X/(float32 w)), uint16 (newPosition.Y/(float32 h)))
-        let tileId = tile.GlobalIdentifier
-        if tileId = 0 then
-            this.position <- newPosition
+    member this.Move(gameTime: GameTime, dir: Vector2, map: Map) =
+        match this.moveCurve with
+        | Some _ ->
+            () // ignore the move while we have one that is active
+        | None ->
+            let buildingLayer = map.tileMap.GetLayer("building") :?> TiledMapTileLayer
+            let w,h = buildingLayer.TileWidth, buildingLayer.TileHeight
+            let newPosition = this.position + dir*(float32 w)
+            // check collision a little further in the move direction because we're not using full bounding box for the character
+            // TODO this doesn't really work... use tile centers instead?
+            let collisionPosition = newPosition + dir*(float32 w)*0.1f 
+            //printfn "player move: %s/%s/%d" (this.position.ToString()) (dir.ToString()) w
+            let tile = buildingLayer.GetTile(uint16 (collisionPosition .X/(float32 w)), uint16 (collisionPosition .Y/(float32 h)))
+            let tileId = tile.GlobalIdentifier
+            if tileId = 0 then
+                let time = gameTime.TotalGameTime.TotalSeconds |> float32
+                this.moveCurve <- Curve.create(this.position, newPosition, time, 0.15f) |> Some
 
+    static member create(sprite: Texture2D, map: Map) =
+        { sprite = sprite
+          position = map.PlayerPosition()
+          moveCurve = None
+          }
+
+
+/// -------------------------------------------------------------------------------------------------------- ///
 type Game1 () as this =
     inherit Game()
 
@@ -73,6 +125,7 @@ type Game1 () as this =
     let getMovementDirection() : Vector2 =
         let state = Keyboard.GetState()
 
+        // TODO queue the move keys up as commands to debounce
         if (state.IsKeyDown(Keys.Down)) then
             Vector2.UnitY
         elif (state.IsKeyDown(Keys.Up)) then
@@ -111,10 +164,7 @@ type Game1 () as this =
         spriteBatch <- new SpriteBatch(this.GraphicsDevice)
         
         // TODO: use this.Content to load your game content here
-        player <- Some {
-            sprite = this.Content.Load("Basic1")
-            position = sampleMap.PlayerPosition()
-        }
+        player <- Character.create(this.Content.Load("Basic1"), sampleMap) |> Some
 
         //playerPosition.ToString() |> printfn "player position: %s"
 
@@ -127,10 +177,14 @@ type Game1 () as this =
         player |> Option.iter (fun p -> p.Update(gameTime))
 
         // update camera
-        let speed: float32 = 200.0f
-        let seconds = gameTime.GetElapsedSeconds()
         let movementDirection = getMovementDirection()
-        player |> Option.iter (fun p -> p.Move(movementDirection, map.Value))
+        if movementDirection.LengthSquared() > 0.0f then
+            player |> Option.iter (fun p -> p.Move(gameTime, movementDirection, map.Value))
+
+        player |> Option.iter (fun p -> p.Update(gameTime))
+
+        //let speed: float32 = 200.0f
+        //let seconds = gameTime.TotalGameTime.TotalSeconds |> float32
         //cameraPosition <- cameraPosition + speed * movementDirection * seconds
         //camera |> Option.iter (fun c -> c.LookAt(cameraPosition))
 
