@@ -38,7 +38,7 @@ type Map =
 
     member this.Update(gameTime: GameTime) =
         this.tileMapRenderer.Update(gameTime)
-    
+
     member this.Draw(viewMatrix: Matrix) =
         this.tileMapRenderer.Draw(viewMatrix)
 
@@ -95,7 +95,7 @@ type Character =
             let newPosition = this.position + dir*(float32 w)
             // check collision a little further in the move direction because we're not using full bounding box for the character
             // TODO this doesn't really work... use tile centers instead?
-            let collisionPosition = newPosition + dir*(float32 w)*0.1f 
+            let collisionPosition = newPosition + dir*(float32 w)*0.1f
             //printfn "player move: %s/%s/%d" (this.position.ToString()) (dir.ToString()) w
             let tile = buildingLayer.GetTile(uint16 (collisionPosition .X/(float32 w)), uint16 (collisionPosition .Y/(float32 h)))
             let tileId = tile.GlobalIdentifier
@@ -162,7 +162,7 @@ type Game1 () as this =
 
         map <- Some sampleMap
         spriteBatch <- new SpriteBatch(this.GraphicsDevice)
-        
+
         // TODO: use this.Content to load your game content here
         player <- Character.create(this.Content.Load("Basic1"), sampleMap) |> Some
 
