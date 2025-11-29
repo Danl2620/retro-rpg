@@ -1,7 +1,7 @@
 
 PipelineVer := "4.0.0"
-NugetCachePath := shell("dotnet nuget locals global-packages -l | awk '{print $2}'")
-PipelineDllPath := NugetCachePath / "monogame.extended.content.pipeline" / PipelineVer / "tools"
+NugetCachePath := justfile_directory() / "packages"
+PipelineDllPath := NugetCachePath / "MonoGame.Extended.Content.Pipeline" / "tools"
 
 _default:
     just --choose
