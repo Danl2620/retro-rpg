@@ -11,9 +11,6 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <DotNetCliToolReference Include="paket" Version="*" />
-  </ItemGroup>
-  <ItemGroup>
     <None Remove="Icon.ico" />
     <None Remove="Icon.bmp" />
   </ItemGroup>
@@ -24,7 +21,11 @@
     <Compile Include="Program.fs" />
     <MonoGameContentReference Include="Content/Content.mgcb" Visible="false" />
   </ItemGroup>
-  <!-- <Import Project=".paket\Paket.Restore.targets" /> -->
-  <Import Project="paket.references" />
+  <ItemGroup>
+    <Reference Include="FSharp.Core">
+      <HintPath>packages/FSharp.Core/lib/netstandard2.1/FSharp.Core.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+  </ItemGroup>
   <Import Project=".paket\Paket.Restore.targets" />
 </Project>

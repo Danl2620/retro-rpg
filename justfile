@@ -11,6 +11,9 @@ install-monogame:
     dotnet tool restore
     dotnet tool run paket restore -v
 
+build:
+    dotnet build
+
 build-content:
     dotnet tool run mgcb \
         /f:"{{PipelineDllPath}}/MonoGame.Extended.Content.Pipeline.dll" \
