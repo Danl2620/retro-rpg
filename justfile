@@ -8,10 +8,8 @@ _default:
 
 
 install-monogame:
-    dotnet add package MonoGame.Framework.DesktopGL --version 3.8.1.303
-    dotnet add package MonoGame.Extended --version 3.8.0
-    dotnet add package MonoGame.Extended.Content.Pipeline --version {{PipelineVer}}
-    dotnet add package MonoGame.Content.Builder.Task --version 3.8.1.303
+    dotnet tool restore
+    dotnet tool run paket restore -v
 
 build-content:
     dotnet tool run mgcb \

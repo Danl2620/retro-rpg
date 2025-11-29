@@ -1,0 +1,12 @@
+RESTRICTION: == net8.0
+NUGET
+  remote: https://api.nuget.org/v3/index.json
+    Autofac (9.0)
+      System.Diagnostics.DiagnosticSource (>= 10.0)
+    MonoGame.Content.Builder.Task (3.8.1.303)
+    MonoGame.Extended (4.0)
+    MonoGame.Extended.Content.Pipeline (4.0)
+      Autofac (>= 5.2)
+      MonoGame.Extended (>= 4.0)
+    MonoGame.Framework.DesktopGL (3.8.1.303)
+    System.Diagnostics.DiagnosticSource (10.0)

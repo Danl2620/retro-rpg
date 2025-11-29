@@ -1,32 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
     <PublishReadyToRun>false</PublishReadyToRun>
     <TieredCompilation>false</TieredCompilation>
   </PropertyGroup>
-
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
-
+  <ItemGroup>
+    <DotNetCliToolReference Include="paket" Version="*" />
+  </ItemGroup>
   <ItemGroup>
     <None Remove="Icon.ico" />
     <None Remove="Icon.bmp" />
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
     <EmbeddedResource Include="Icon.bmp" />
     <Compile Include="Game1.fs" />
     <Compile Include="Program.fs" />
     <MonoGameContentReference Include="Content/Content.mgcb" Visible="false" />
-    <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.1.303" />
-    <PackageReference Include="MonoGame.Extended" Version="3.8.0" />
-    <PackageReference Include="MonoGame.Extended.Content.Pipeline" Version="4.0.0" />
-    <TrimmerRootAssembly Include="MonoGame.Framework" Visible="false" />
-    <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303" />
   </ItemGroup>
+  <!-- <Import Project=".paket\Paket.Restore.targets" /> -->
+  <Import Project="paket.references" />
+  <Import Project=".paket\Paket.Restore.targets" />
 </Project>
