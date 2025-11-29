@@ -14,12 +14,15 @@ install-monogame:
 build:
     dotnet build
 
-build-content:
-    dotnet tool run mgcb \
-        /f:"{{PipelineDllPath}}/MonoGame.Extended.Content.Pipeline.dll" \
-        /f:"{{PipelineDllPath}}/MonoGame.Extended.dll" \
-        /@:"Content/Content.mgcb" \
-        /platform:DesktopGL \
-        /outputDir:"Content/bin/DesktopGL/Content" \
-        /intermediateDir:"Content/obj/DesktopGL/Content" \
-        /workingDir:"Content"
+run:
+    dotnet run
+
+# build-content:
+#     dotnet tool run mgcb \
+#         /f:"{{PipelineDllPath}}/MonoGame.Extended.Content.Pipeline.dll" \
+#         /f:"{{PipelineDllPath}}/MonoGame.Extended.dll" \
+#         /@:"Content/Content.mgcb" \
+#         /platform:DesktopGL \
+#         /outputDir:"Content/bin/DesktopGL/Content" \
+#         /intermediateDir:"Content/obj/DesktopGL/Content" \
+#         /workingDir:"Content"
