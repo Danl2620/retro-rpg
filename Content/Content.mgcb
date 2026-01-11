@@ -62,136 +62,40 @@
 /processorParam:TextureFormat=Color
 /build:Cliff.png
 
-#begin example/[A]Dirt_pipo.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:example/[A]Dirt_pipo.png
-
 #begin example/[A]Dirt_pipo.tsx
 /importer:TiledMapTilesetImporter
 /processor:TiledMapTilesetProcessor
 /build:example/[A]Dirt_pipo.tsx
-
-#begin example/[A]Flower_pipo.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:example/[A]Flower_pipo.png
 
 #begin example/[A]Flower_pipo.tsx
 /importer:TiledMapTilesetImporter
 /processor:TiledMapTilesetProcessor
 /build:example/[A]Flower_pipo.tsx
 
-#begin example/[A]Grass_pipo.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:example/[A]Grass_pipo.png
-
 #begin example/[A]Grass_pipo.tsx
 /importer:TiledMapTilesetImporter
 /processor:TiledMapTilesetProcessor
 /build:example/[A]Grass_pipo.tsx
-
-#begin example/[A]Wall-Up_pipo.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:example/[A]Wall-Up_pipo.png
 
 #begin example/[A]Wall-Up_pipo.tsx
 /importer:TiledMapTilesetImporter
 /processor:TiledMapTilesetProcessor
 /build:example/[A]Wall-Up_pipo.tsx
 
-#begin example/[A]Water_pipo.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:example/[A]Water_pipo.png
-
 #begin example/[A]Water_pipo.tsx
 /importer:TiledMapTilesetImporter
 /processor:TiledMapTilesetProcessor
 /build:example/[A]Water_pipo.tsx
-
-#begin example/[A]WaterFall_pipo.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:example/[A]WaterFall_pipo.png
 
 #begin example/[A]WaterFall_pipo.tsx
 /importer:TiledMapTilesetImporter
 /processor:TiledMapTilesetProcessor
 /build:example/[A]WaterFall_pipo.tsx
 
-#begin example/[Base]BaseChip_pipo.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:example/[Base]BaseChip_pipo.png
-
 #begin example/[Base]BaseChip_pipo.tsx
 /importer:TiledMapTilesetImporter
 /processor:TiledMapTilesetProcessor
 /build:example/[Base]BaseChip_pipo.tsx
-
-#begin example/LightShadow_pipo.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:example/LightShadow_pipo.png
 
 #begin example/LightShadow_pipo.tsx
 /importer:TiledMapTilesetImporter
@@ -215,18 +119,6 @@
 /processorParam:TextureFormat=Color
 /build:FlowerPatch.png
 
-#begin oryx/oryx_creatures.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:oryx/oryx_creatures.png
-
 #begin oryx/oryx_fx.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -239,18 +131,6 @@
 /processorParam:TextureFormat=Color
 /build:oryx/oryx_fx.png
 
-#begin oryx/oryx_items.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:oryx/oryx_items.png
-
 #begin oryx/oryx_tiles.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -262,30 +142,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:oryx/oryx_tiles.png
-
-#begin oryx/oryx_world.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:oryx/oryx_world.png
-
-#begin oryx/oryx_world2.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:oryx/oryx_world2.png
 
 #begin oryx/TMX/oryx_16-bit_fantasy_test.tmx
 /importer:TiledMapImporter
