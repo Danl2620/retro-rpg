@@ -68,6 +68,12 @@ type Map =
 
     static member create(graphicsDevice: GraphicsDevice, content: ContentManager, mapPath: string) =
         let map = content.Load<TiledMap>(mapPath)
+
+        // Validate that the required "building" layer exists
+        let buildingLayer = map.GetLayer("building")
+        if buildingLayer = null then
+            failwithf "Map '%s' is missing required layer 'building'. Please add a layer named 'building' to the tilemap." mapPath
+
         { tileMap = map
           tileMapRenderer = new TiledMapRenderer(graphicsDevice, map) }
 
