@@ -1,6 +1,6 @@
 namespace RetroRpg
 
-//open System
+open System.IO
 open Microsoft.Xna.Framework
 open Microsoft.Xna.Framework.Graphics
 open Microsoft.Xna.Framework.Input
@@ -9,6 +9,22 @@ open MonoGame.Extended
 open MonoGame.Extended.Tiled
 open MonoGame.Extended.Tiled.Renderers
 open MonoGame.Extended.ViewportAdapters
+open YamlDotNet.Serialization
+
+/// -------------------------------------------------------------------------------------------------------- ///
+[<CLIMutable>]
+type AssetsConfig =
+    { map: string
+      playerSprite: string }
+
+[<CLIMutable>]
+type GameConfig =
+    { assets: AssetsConfig }
+
+    static member load(path: string) : GameConfig =
+        let yaml = File.ReadAllText(path)
+        let deserializer = DeserializerBuilder().Build()
+        deserializer.Deserialize<GameConfig>(yaml)
 
 /// -------------------------------------------------------------------------------------------------------- ///
 type Curve =
@@ -50,9 +66,8 @@ type Map =
         let p = objectLayer.Objects.[0].Position
         p
 
-    static member create(graphicsDevice: GraphicsDevice, content: ContentManager) =
-        let map = content.Load<TiledMap>("example/samplemap")
-        //let map = content.Load<TiledMap>("oryx/TMX/oryx_16-bit_fantasy_test")
+    static member create(graphicsDevice: GraphicsDevice, content: ContentManager, mapPath: string) =
+        let map = content.Load<TiledMap>(mapPath)
         { tileMap = map
           tileMapRenderer = new TiledMapRenderer(graphicsDevice, map) }
 
@@ -120,6 +135,7 @@ type Game1 () as this =
     let mutable camera : OrthographicCamera option = None
     let mutable cameraPosition: Vector2 = Vector2.Zero
     let mutable player: Character option = None
+    let mutable config: GameConfig option = None
 
     // private functions
     let getMovementDirection() : Vector2 =
@@ -154,7 +170,9 @@ type Game1 () as this =
         base.Initialize()
 
     override this.LoadContent() =
-        let sampleMap = Map.create(this.GraphicsDevice, this.Content)
+        config <- GameConfig.load("config.yaml") |> Some
+
+        let sampleMap = Map.create(this.GraphicsDevice, this.Content, config.Value.assets.map)
 
         match sampleMap.Size() with
         | (w,h) ->
@@ -163,10 +181,7 @@ type Game1 () as this =
         map <- Some sampleMap
         spriteBatch <- new SpriteBatch(this.GraphicsDevice)
 
-        // TODO: use this.Content to load your game content here
-        player <- Character.create(this.Content.Load("Basic1"), sampleMap) |> Some
-
-        //playerPosition.ToString() |> printfn "player position: %s"
+        player <- Character.create(this.Content.Load(config.Value.assets.playerSprite), sampleMap) |> Some
 
     override this.Update (gameTime) =
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back = ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))

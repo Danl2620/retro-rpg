@@ -7,3 +7,4 @@ nuget MonoGame.Framework.DesktopGL 3.8.1.303
 nuget MonoGame.Extended 4.0.0
 nuget MonoGame.Extended.Content.Pipeline 4.0.0
 nuget MonoGame.Content.Builder.Task 3.8.1.303
+nuget YamlDotNet >= 16.0.0

@@ -11,3 +11,4 @@ NUGET
       MonoGame.Extended (>= 4.0)
     MonoGame.Framework.DesktopGL (3.8.1.303)
     System.Diagnostics.DiagnosticSource (10.0)
+    YamlDotNet (16.3)
