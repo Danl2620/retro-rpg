@@ -2,7 +2,31 @@
   "permissions": {
     "allow": [
       "Bash(dotnet build:*)",
-      "Bash(dotnet tool run paket:*)"
+      "Bash(dotnet tool run paket:*)",
+      "Bash(just build:*)",
+      "Bash(dotnet mgcb:*)",
+      "Bash(just run)",
+      "Bash(glxinfo:*)",
+      "Bash(echo:*)",
+      "Bash(lspci:*)",
+      "Bash(DISPLAY=:0 just run:*)",
+      "Bash(DISPLAY=:1 just run:*)",
+      "Bash(ldconfig:*)",
+      "Bash(cat:*)",
+      "Bash(LIBGL_DRIVERS_PATH=/nix/store/7blr10fd9bcj2pa2c1wygkn9m5cj6vqx-mesa-25.0.6/lib/dri just run:*)",
+      "Bash(LIBGL_ALWAYS_SOFTWARE=1 just run:*)",
+      "Bash(DISPLAY=:1 xdpyinfo)",
+      "Bash(lsmod:*)",
+      "Bash(dmesg:*)",
+      "Bash(MESA_DEBUG=1 LIBGL_DEBUG=verbose just run:*)",
+      "Bash(SDL_VIDEODRIVER=x11 just run:*)",
+      "Bash(DISPLAY=:1 dotnet run:*)",
+      "Bash(DISPLAY=:1 SDL_DEBUG=1 LIBGL_DEBUG=verbose dotnet run:*)",
+      "Bash(SDL_VIDEODRIVER=dummy dotnet run:*)",
+      "Bash(DISPLAY=:1 strace:*)",
+      "Bash(DISPLAY=:0 dotnet run:*)",
+      "Bash(DISPLAY=:1 DOTNET_ENVIRONMENT=Development dotnet run:*)",
+      "Bash(DISPLAY=:0 xhost:*)"
     ]
   }
 }

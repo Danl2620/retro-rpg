@@ -26,4 +26,4 @@ build:
 # Run the game
 [group('development')]
 run:
-    dotnet run
+    DISPLAY=:0 dotnet run
