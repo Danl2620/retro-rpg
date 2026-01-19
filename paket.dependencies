@@ -1,6 +1,6 @@
 source https://api.nuget.org/v3/index.json
 
-framework: net8.0
+framework: net9.0
 
 nuget FSharp.Core >= 8.0.0
 nuget MonoGame.Framework.DesktopGL 3.8.1.303

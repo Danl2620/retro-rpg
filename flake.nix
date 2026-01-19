@@ -21,9 +21,9 @@
               (final: prev: {
                 SDL2 = prev.SDL2.overrideAttrs (oldAttrs: {
                   configureFlags = (oldAttrs.configureFlags or []) ++ [
-                    # "--disable-ime"
-                    # "--disable-ibus"
-                    # "--disable-fcitx"
+                    "--disable-ime"
+                    "--disable-ibus"
+                    "--disable-fcitx"
                   ];
                 });
               })

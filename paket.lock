@@ -1,9 +1,9 @@
-RESTRICTION: == net8.0
+RESTRICTION: == net9.0
 NUGET
   remote: https://api.nuget.org/v3/index.json
     Autofac (9.0)
       System.Diagnostics.DiagnosticSource (>= 10.0)
-    FSharp.Core (10.0.100)
+    FSharp.Core (10.0.102)
     MonoGame.Content.Builder.Task (3.8.1.303)
     MonoGame.Extended (4.0)
     MonoGame.Extended.Content.Pipeline (4.0)
