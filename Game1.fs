@@ -92,7 +92,7 @@ type Character =
         | Some curve ->
             let time = gameTime.TotalGameTime.TotalSeconds |> float32
             if curve.Finished(time) then
-                //printfn "player update: %s/%s/%f" (this.position.ToString()) (curve.p1.ToString()) time
+                //rintfn "player update: %s/%s/%f" (this.position.ToString()) (curve.p1.ToString()) time
                 this.position <- curve.p1
                 this.moveCurve <- None
             else
@@ -137,9 +137,11 @@ type Game1 () as this =
 
     let graphics = new GraphicsDeviceManager(this)
     do
+        this.Content.RootDirectory <- "Content"
         graphics.GraphicsProfile <- GraphicsProfile.Reach
         graphics.SynchronizeWithVerticalRetrace <- false
         graphics.PreferMultiSampling <- false
+        this.IsMouseVisible <- true
     let mutable map: Map option = None
     let mutable spriteBatch = Unchecked.defaultof<_>
     let mutable camera : OrthographicCamera option = None
@@ -167,8 +169,7 @@ type Game1 () as this =
     override this.Initialize() =
         // TODO: Add your initialization logic here
         //let contentPath = System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), "Content/bin/DesktopGL")
-        this.Content.RootDirectory <- "Content"
-        this.IsMouseVisible <- true
+        //this.Content.RootDirectory <- "Content"
 
         let size = (800,600)
         match size with

@@ -10,8 +10,8 @@
 
 #-------------------------------- References --------------------------------#
 
-/reference:../packages/MonoGame.Extended/lib/net6.0/MonoGame.Extended.dll
-/reference:../packages/MonoGame.Extended.Content.Pipeline/lib/net6.0/MonoGame.Extended.Content.Pipeline.dll
+/reference:../packages/MonoGame.Extended.Content.Pipeline/tools/MonoGame.Extended.dll
+/reference:../packages/MonoGame.Extended.Content.Pipeline/tools/MonoGame.Extended.Content.Pipeline.dll
 
 #---------------------------------- Content ---------------------------------#
 

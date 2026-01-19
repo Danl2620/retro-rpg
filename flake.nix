@@ -16,9 +16,14 @@
         let
           pkgs = import nixpkgs {
             inherit system;
+            config.allowUnfree = true;
             overlays = [
-              # Override SDL2 to disable all IME support which crashes on XWayland
+              # Force use of regular SDL2 instead of sdl2-compat
+              # and disable IME support which crashes with fcitx
               (final: prev: {
+                # SDL2 = (prev.SDL2.override {
+                #   withStatic = false;
+                # }).overrideAttrs (oldAttrs: {
                 SDL2 = prev.SDL2.overrideAttrs (oldAttrs: {
                   configureFlags = (oldAttrs.configureFlags or []) ++ [
                     "--disable-ime"
@@ -100,6 +105,10 @@
               ]}:$LD_LIBRARY_PATH"
               export LIBGL_DRIVERS_PATH="${pkgs.mesa}/lib/dri"
               export SDL_VIDEODRIVER=x11
+              # Disable SDL2 input method support to prevent fcitx crashes
+              unset SDL_IM_MODULE
+              unset INPUT_METHOD
+              unset XMODIFIERS
               echo "F# + MonoGame dev shell is ready."
             '';
           };

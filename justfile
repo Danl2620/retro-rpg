@@ -1,5 +1,4 @@
 
-PipelineVer := "4.0.0"
 NugetCachePath := justfile_directory() / "packages"
 PipelineDllPath := NugetCachePath / "MonoGame.Extended.Content.Pipeline" / "tools"
 
@@ -26,4 +25,4 @@ build:
 # Run the game
 [group('development')]
 run:
-    DISPLAY=:1 DRI_PRIME=0 dotnet run
+    dotnet run

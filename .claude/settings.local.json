@@ -48,7 +48,15 @@
       "Bash(coredumpctl info:*)",
       "Bash(SDL_DISABLE_IBUS=1 SDL_DISABLE_FCITX=1 DISPLAY=:1 DRI_PRIME=0 dotnet run:*)",
       "Bash(ldd:*)",
-      "Bash(nix flake update:*)"
+      "Bash(nix flake update:*)",
+      "Bash(dotnet new:*)",
+      "Bash(rm:*)",
+      "Bash(dotnet paket:*)",
+      "Bash(DISPLAY=:1 LIBGL_DEBUG=verbose dotnet run:*)",
+      "Bash(SDL_DISABLE_IBUS=1 SDL_DISABLE_FCITX=1 DISPLAY=:1 dotnet run:*)",
+      "Bash(env:*)",
+      "Bash(SDL_IM_MODULE= XMODIFIERS= DISPLAY=:1 dotnet run)",
+      "Bash(dotnet run:*)"
     ]
   }
 }
