@@ -26,4 +26,4 @@ build:
 # Run the game
 [group('development')]
 run:
-    DISPLAY=:0 dotnet run
+    DISPLAY=:1 DRI_PRIME=0 dotnet run

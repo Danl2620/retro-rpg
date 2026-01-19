@@ -26,7 +26,29 @@
       "Bash(DISPLAY=:1 strace:*)",
       "Bash(DISPLAY=:0 dotnet run:*)",
       "Bash(DISPLAY=:1 DOTNET_ENVIRONMENT=Development dotnet run:*)",
-      "Bash(DISPLAY=:0 xhost:*)"
+      "Bash(DISPLAY=:0 xhost:*)",
+      "Bash(nix develop:*)",
+      "Bash(xhost +local::*)",
+      "Bash(DISPLAY=:1 xhost +local:)",
+      "Bash(tee:*)",
+      "WebSearch",
+      "Bash(lscpu:*)",
+      "Bash(pacman -Q:*)",
+      "Bash(DISPLAY=:1 glxinfo:*)",
+      "Bash(hyprctl version:*)",
+      "Bash(env)",
+      "Bash(modinfo:*)",
+      "Bash(dmidecode:*)",
+      "Bash(journalctl:*)",
+      "Bash(hyprctl monitors:*)",
+      "Bash(while read -r d)",
+      "Bash(done)",
+      "Bash(coredumpctl list:*)",
+      "Bash(env -u SDL_VIDEODRIVER DISPLAY=:1 DRI_PRIME=0 dotnet run:*)",
+      "Bash(coredumpctl info:*)",
+      "Bash(SDL_DISABLE_IBUS=1 SDL_DISABLE_FCITX=1 DISPLAY=:1 DRI_PRIME=0 dotnet run:*)",
+      "Bash(ldd:*)",
+      "Bash(nix flake update:*)"
     ]
   }
 }

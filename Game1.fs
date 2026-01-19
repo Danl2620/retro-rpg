@@ -136,6 +136,10 @@ type Game1 () as this =
     inherit Game()
 
     let graphics = new GraphicsDeviceManager(this)
+    do
+        graphics.GraphicsProfile <- GraphicsProfile.Reach
+        graphics.SynchronizeWithVerticalRetrace <- false
+        graphics.PreferMultiSampling <- false
     let mutable map: Map option = None
     let mutable spriteBatch = Unchecked.defaultof<_>
     let mutable camera : OrthographicCamera option = None

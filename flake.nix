@@ -1,11 +1,12 @@
 {
-  description = "Dev shell for F# + MonoGame/XNA using nixpkgs 25.05";
+  description = "Dev shell for F# + MonoGame/XNA using nixpkgs 23.11";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixgl.url = "github:nix-community/nixGL";
   };
 
-  outputs = { self, nixpkgs }:
+  outputs = { self, nixpkgs, nixgl }:
     let
       systems = [ "x86_64-darwin" "x86_64-linux" ];
       forAllSystems = nixpkgs.lib.genAttrs systems;
@@ -13,14 +14,31 @@
     {
       devShells = forAllSystems (system:
         let
-          pkgs = import nixpkgs { inherit system; };
+          pkgs = import nixpkgs {
+            inherit system;
+            overlays = [
+              # Override SDL2 to disable all IME support which crashes on XWayland
+              (final: prev: {
+                SDL2 = prev.SDL2.overrideAttrs (oldAttrs: {
+                  configureFlags = (oldAttrs.configureFlags or []) ++ [
+                    # "--disable-ime"
+                    # "--disable-ibus"
+                    # "--disable-fcitx"
+                  ];
+                });
+              })
+            ];
+          };
+          nixgl-pkgs = nixgl.packages.${system};
+          dotnet-sdk = pkgs.dotnet-sdk_9;
+          dotnet-runtime = pkgs.dotnet-runtime_9;
         in
         {
           default = pkgs.mkShell {
             # .NET SDK (includes F# compiler)
             buildInputs = with pkgs; [
-              dotnet-sdk_8
-              dotnet-runtime_8
+              dotnet-sdk
+              dotnet-runtime
 
               # Native dependencies MonoGame needs
               SDL2
@@ -45,14 +63,21 @@
               wayland
               libxkbcommon
 
+              # Diagnostic tools
+              mesa-demos  # provides glxinfo
+              xorg.xdpyinfo
+
               powershell
+
+              # NixGL for OpenGL support
+              nixgl-pkgs.nixGLDefault
             ];
 
             # Environment variables that help dotnet behave sanely
-            DOTNET_ROOT = "${pkgs.dotnet-sdk_8}";
+            DOTNET_ROOT = "${dotnet-sdk}";
             PATH = [
-              "${pkgs.dotnet-sdk_8}/bin"
-              "${pkgs.dotnet-runtime_8}/bin"
+              "${dotnet-sdk}/bin"
+              "${dotnet-runtime}/bin"
             ];
 
             # Optional QoL things
