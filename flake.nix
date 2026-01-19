@@ -46,24 +46,24 @@
               dotnet-runtime
 
               # Native dependencies MonoGame needs
-              SDL2
-              SDL2_ttf
-              SDL2_image
-              SDL2_mixer
+              # SDL2
+              # SDL2_ttf
+              # SDL2_image
+              # SDL2_mixer
 
               # OpenGL libraries
-              libGL
-              libGLU
-              mesa
-              mesa_glu
-
-              # X11 libraries for MonoGame
-              xorg.libX11
-              xorg.libXi
-              xorg.libXcursor
-              xorg.libXrandr
-              xorg.libXext
-
+              # libGL
+              # libGLU
+              # mesa
+              # mesa_glu
+              #
+              # # X11 libraries for MonoGame
+              # xorg.libX11
+              # xorg.libXi
+              # xorg.libXcursor
+              # xorg.libXrandr
+              # xorg.libXext
+              #
               # Wayland/Xwayland support
               wayland
               libxkbcommon
@@ -75,7 +75,7 @@
               powershell
 
               # NixGL for OpenGL support
-              nixgl-pkgs.nixGLDefault
+              # nixgl-pkgs.nixGLDefault
             ];
 
             # Environment variables that help dotnet behave sanely
